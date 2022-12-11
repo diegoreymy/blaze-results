@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const xl = require('excel4node');
-const htpp = require('http');
+const fetch = require('node-fetch');
 
 let data = [];
 
@@ -31,25 +31,21 @@ app.listen(process.env.PORT || 3000, function () {
 });
 
 
-async function fetchResults() {
+async function getResults() {
+
     console.log("Buscando resultados...")
-    const response = await requestPromise('https://blaze.com/api/roulette_games/recent');
+    const response = await fetch('https://blaze.com/api/roulette_games/recent');
     const result = await response.json();
-    return result;
-}
 
-function getResults() {
+    const splitedResult = splitResult(data, result);
 
-    fetchResults.then(value => {
-        const splitedResult = splitResult(data, value);
+    splitedResult.forEach(e => data.unshift(e));
 
-        splitedResult.forEach(e => data.unshift(e));
-
-        fs.writeFile("data.json", JSON.stringify(data), function (err) {
-            if (err) throw err;
-            console.log('complete');
-        });
+    fs.writeFile("data.json", JSON.stringify(data), function (err) {
+        if (err) throw err;
+        console.log('complete');
     });
+
 }
 
 function splitResult(data, newData) {
@@ -132,26 +128,5 @@ function colorCell(color) {
         font: {
             color: color
         },
-    });
-}
-
-
-
-async function requestPromise(path) {
-    return new Promise((resolve, reject) => {
-        http.get(path, (resp) => {
-            let data = '';
-
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-
-            resp.on('end', () => {
-                resolve(data);
-            });
-
-        }).on("error", (error) => {
-            reject(error);
-        });
     });
 }
