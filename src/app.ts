@@ -1,16 +1,15 @@
 import express from 'express';
-import fetch from 'node-fetch';
 import { data, IBlazeRecentData } from './data';
 import fs from 'fs';
 
 const xl = require('excel4node');
+const fetch = require('node-fetch');
+
 const wb = new xl.Workbook();
 const ws = wb.addWorksheet('Resultados Blaze');
 
 const app = express();
 const port = process.env.PORT || 3000
-
-app.use(express.static(__dirname + '/dist'));
 
 getResults();
 saveResultsAsXlsFile();
