@@ -1,8 +1,9 @@
-import express from 'express';
-import { data, IBlazeRecentData } from './data';
-import fs from 'fs';
-import xl from 'excel4node';
-import fetch from 'node-fetch';
+const express = require('express');
+const fs = require('fs');
+const xl = require('excel4node');
+const fetch = require('node-fetch');
+
+let data = [];
 
 const wb = new xl.Workbook();
 const ws = wb.addWorksheet('Resultados Blaze');
@@ -34,9 +35,9 @@ async function getResults() {
 
   console.log("Buscando resultados...")
   const response = await fetch('https://blaze.com/api/roulette_games/recent');
-  const result: IBlazeRecentData[] = await response.json();
+  const result = await response.json();
 
-  const splitedResult: IBlazeRecentData[] = splitResult(data, result);
+  const splitedResult = splitResult(data, result);
 
   data.unshift(...splitedResult);
 
@@ -47,17 +48,17 @@ async function getResults() {
   );
 }
 
-function splitResult(data: IBlazeRecentData[], newData: IBlazeRecentData[]): IBlazeRecentData[] {
+function splitResult(data, newData) {
 
-  let result: IBlazeRecentData[] = [];
+  let result = [];
   let isElementFound = false;
 
-  const lastData10Elements: IBlazeRecentData[] = data.slice(0, 20);
+  const lastData10Elements = data.slice(0, 20);
 
   if (data.length >= 20) {
-    lastData10Elements.forEach((dataElement: IBlazeRecentData) => {
+    lastData10Elements.forEach((dataElement) => {
       if (!isElementFound) {
-        newData.forEach((newDataElement: IBlazeRecentData, index: number) => {
+        newData.forEach((newDataElement, index) => {
           if (newDataElement.id == dataElement.id) {
             result = newData.splice(0, index);
             isElementFound = true;
@@ -101,7 +102,7 @@ function saveResultsAsXlsFile() {
   });
   //Write Data in Excel file
   let rowIndex = 2;
-  formattedData.forEach((record: IBlazeRecentData) => {
+  formattedData.forEach((record) => {
     let columnIndex = 1;
     Object.keys(record).forEach(columnName => {
       if (columnName == 'Cor') {
