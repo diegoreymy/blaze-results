@@ -44,6 +44,7 @@ async function getResults() {
   fs.writeFile("data.json", JSON.stringify(data), function (err) {
     if (err) throw err;
     console.log('se guardó en el archivo json');
+    console.log('=============================');
   }
   );
 }
