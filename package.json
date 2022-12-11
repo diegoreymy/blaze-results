@@ -19,6 +19,6 @@
     "excel4node": "^1.8.0"
   },
   "engines": {
-    "node": "18.x"
+    "node": "14.x"
   }
 }
