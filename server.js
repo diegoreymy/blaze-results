@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const xl = require('excel4node');
-const fetch = require('node-fetch');
 
 let data = [];
 

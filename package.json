@@ -16,7 +16,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "@types/express": "^4.17.1",
-    "@types/node-fetch": "^2.6.2",
     "excel4node": "^1.8.0"
   },
   "engines": {
