@@ -38,7 +38,7 @@ async function getResults() {
 
   const splitedResult = splitResult(data, result);
 
-  data.unshift(...splitedResult);
+  splitedResult.forEach(e => data.unshift(e));
 
   fs.writeFile("data.json", JSON.stringify(data), function (err) {
     if (err) throw err;
@@ -67,7 +67,7 @@ function splitResult(data, newData) {
       }
     })
   } else {
-    result = newData;
+    newData.forEach(e => result.push(e));
   }
 
   return result;
