@@ -11,8 +11,10 @@ const app = express();
 const port = 3000;
 
 getResults();
+saveResultsAsXlsFile();
 setInterval(() => {
   getResults();
+  saveResultsAsXlsFile();
 }, 30000);
 
 app.get('/', (req, res) => {
@@ -41,7 +43,7 @@ async function getResults() {
 
   fs.writeFile("data.json", JSON.stringify(data), function (err) {
     if (err) throw err;
-    console.log('complete');
+    console.log('se guardó en el archivo json');
   }
   );
 }
