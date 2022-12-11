@@ -1,7 +1,7 @@
-const express = require('express');
-const fs = require('fs');
-const xl = require('excel4node');
-const fetch = require('node-fetch');
+import express from 'express';
+import fs from 'fs';
+import xl from 'excel4node';
+import fetch from 'node-fetch';
 
 let data = [];
 
