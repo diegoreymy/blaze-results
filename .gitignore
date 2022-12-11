@@ -1,5 +1,3 @@
 /node_modules
-/dist
 /data.xlsx
-/data.json
 /package-lock.json
