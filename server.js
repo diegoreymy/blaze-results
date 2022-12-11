@@ -37,7 +37,7 @@ async function fetchResults() {
     return result;
 }
 
-async function getResults() {
+function getResults() {
 
     fetchResults.then(value => {
         const splitedResult = splitResult(data, value);
