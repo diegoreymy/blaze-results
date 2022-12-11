@@ -2,8 +2,8 @@ import express from 'express';
 import fetch from 'node-fetch';
 import { data, IBlazeRecentData } from './data';
 import fs from 'fs';
+import xl from 'excel4node';
 
-const xl = require('excel4node');
 const wb = new xl.Workbook();
 const ws = wb.addWorksheet('Resultados Blaze');
 
