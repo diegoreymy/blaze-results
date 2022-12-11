@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start": "node dist/app.js",
-    "init": "concurrently \"npm run build\" \"npm run start\""
+    "init": "concurrently \"npm run build\" \"npm run start\"",
+    "tsc": "npx tsc",
+    "postinstall": "npx tsc"
   },
   "keywords": [],
   "author": "Diego Humberto Reymy Aguilar",
