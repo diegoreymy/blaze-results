@@ -33,8 +33,9 @@ app.listen(process.env.PORT || 3000, function(){
 async function getResults() {
 
   console.log("Buscando resultados...")
+  let result = [];
   const response = await fetch('https://blaze.com/api/roulette_games/recent');
-  const result = await response.json();
+  result = await response.json();
 
   const splitedResult = splitResult(data, result);
 
