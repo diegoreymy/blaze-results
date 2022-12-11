@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const xl = require('excel4node');
+const htpp = require('http');
 
 let data = [];
 
@@ -32,7 +33,7 @@ app.listen(process.env.PORT || 3000, function () {
 
 async function fetchResults() {
     console.log("Buscando resultados...")
-    const response = await fetch('https://blaze.com/api/roulette_games/recent');
+    const response = await requestPromise('https://blaze.com/api/roulette_games/recent');
     const result = await response.json();
     return result;
 }
@@ -47,8 +48,7 @@ function getResults() {
         fs.writeFile("data.json", JSON.stringify(data), function (err) {
             if (err) throw err;
             console.log('complete');
-        }
-        );
+        });
     });
 }
 
@@ -132,5 +132,26 @@ function colorCell(color) {
         font: {
             color: color
         },
+    });
+}
+
+
+
+async function requestPromise(path) {
+    return new Promise((resolve, reject) => {
+        http.get(path, (resp) => {
+            let data = '';
+
+            resp.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            resp.on('end', () => {
+                resolve(data);
+            });
+
+        }).on("error", (error) => {
+            reject(error);
+        });
     });
 }
