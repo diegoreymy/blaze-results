@@ -11,7 +11,10 @@
     "tsc": "npx tsc",
     "postinstall": "npx tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "Diego Humberto Reymy Aguilar",
   "license": "ISC",
   "dependencies": {
