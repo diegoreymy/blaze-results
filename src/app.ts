@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 import fetch from 'node-fetch';
 import { data, IBlazeRecentData } from './data';
 import fs from 'fs';
@@ -43,7 +43,7 @@ async function getResults() {
 
   fs.writeFile("data.json", JSON.stringify(data), function (err) {
     if (err) throw err;
-    console.log('se guardó en el archivo json');
+    console.log('se guardó en el archivo json el registro número: ' + data.length);
     console.log('=============================');
   }
   );
